@@ -30,30 +30,30 @@ The app should display a single to-do list. Anyone can add, remove, or mark comp
 
 The only field a to-do list item has is a text description. That is required to add an item to the to-do list.
 
-- When someone adds an item to the list it should save it to the database.
-- When someone marks an item on the list complete it should update it in the database and show the item as marked complete.
-- When someone removes the item from the list it should soft-delete the item and remove it from the list.
+- [x] When someone adds an item to the list it should save it to the database.
+- [x] When someone marks an item on the list complete it should update it in the database and show the item as marked complete.
+- [x] When someone removes the item from the list it should soft-delete the item and remove it from the list.
 
 
 
 ## Scope
 
-- [ ] I should be able to view all of the items in the to-do list.
-- [ ] I should be able to add an item to the list
-- [ ] I should be able to remove an item from the list
-- [ ] I should be able to mark an item from the list as complete
+- [x] I should be able to view all of the items in the to-do list.
+- [x] I should be able to add an item to the list
+- [x] I should be able to remove an item from the list
+- [x] I should be able to mark an item from the list as complete
 
 There are no design requirements for this task. You can install Tailwind or Bootstrap for basic styling if you prefer or include no styling at all. 
 
 
 ### Technical Requirements
-- Database: Mysql or PostgreSQL
-- API backend: Laravel
-- Frontend: React.js (with typescript and React hooks)
+- [x] Database: Mysql or PostgreSQL
+- [x] API backend: Laravel
+- [x] Frontend: React.js (with typescript and React hooks)
 
 ****
 #### Nice to have but not required:
-- Use Repository Pattern
+- [x] Use Repository Pattern
 - Use Laravel's APiResource for API responses
 ****
 Good luck and don't hesitate to reach out if you have any questions or need clarification on the scope or requirements.
