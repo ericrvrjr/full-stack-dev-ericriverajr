@@ -1,12 +1,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, router } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import { ITodo, PageProps } from '@/types';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 
 export default function Todo({ auth, todos }: PageProps) {
     const [todoList, setTodoList] = useState(todos);
     const [description, setDescription] = useState("");
+    const {errors} = usePage().props
 
 
     const toggleChecked = async (index:number)=>{
@@ -53,6 +53,7 @@ export default function Todo({ auth, todos }: PageProps) {
                                     <input className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" onChange={handleDescChanged} value={description} placeholder="Add Todo" />
                                     <input type="submit" className="flex-no-shrink p-2 border-2 rounded text-white hover:text-white hover:bg-teal-600" value="Add"/>
                                 </div>
+                                {errors.description && <div className="pr-6 pl-6 text-red-600">{errors.description}</div>}
                             </form>
                         </div>
                         {

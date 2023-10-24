@@ -40,11 +40,11 @@ class TodoController extends Controller
      */
     public function store(StoreTodoRequest $request)
     {
-        $todoDetails = $request->only([
+        $todoDetails = $request->safe()->only([
             'description',
         ]);
         $todo = $this->todoRepository->createTodo($todoDetails);
-        return redirect()->back()->with(['todos'=>$this->todoRepository->getAllTodos()]);
+        return redirect()->back();
     }
 
     /**
