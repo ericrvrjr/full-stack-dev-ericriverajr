@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Inertia\Inertia;
 
 class TodoController extends Controller
 {
@@ -22,9 +23,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'data' => $this->todoRepository->getAllTodos()
-        ]);
+
+        return Inertia::render('Todo/Todo', ['todos'=>$this->todoRepository->getAllTodos()]);
     }
 
     /**
@@ -43,13 +43,8 @@ class TodoController extends Controller
         $todoDetails = $request->only([
             'description',
         ]);
-
-        return response()->json(
-            [
-                'data' => $this->todoRepository->createTodo($todoDetails)
-            ],
-            Response::HTTP_CREATED
-        );
+        $todo = $this->todoRepository->createTodo($todoDetails);
+        return redirect()->back()->with(['todos'=>$this->todoRepository->getAllTodos()]);
     }
 
     /**
@@ -57,11 +52,7 @@ class TodoController extends Controller
      */
     public function show(Request $request)
     {
-        $todoId = $request->route('id');
-
-        return response()->json([
-            'data' => $this->todoRepository->getTodoById($todoId)
-        ]);
+        //
     }
 
     /**
@@ -82,10 +73,8 @@ class TodoController extends Controller
             'description',
             'is_complete'
         ]);
-
-        return response()->json([
-            'data' => $this->todoRepository->updateTodo($todoId, $todoDetails)
-        ]);
+        $this->todoRepository->updateTodo($todoId, $todoDetails);
+        return redirect()->back();
     }
 
     /**
@@ -95,7 +84,6 @@ class TodoController extends Controller
     {
         $todoId = $request->route('id');
         $this->todoRepository->deleteTodo($todoId);
-
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        return redirect()->back();
     }
 }

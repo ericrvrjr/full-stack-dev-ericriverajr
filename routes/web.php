@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\TodoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('todos', [TodoController::class, 'index'])->middleware(['auth', 'verified'])->name('todos');
+Route::post('todos', [TodoController::class, 'store'])->middleware(['auth', 'verified'])->name('createtodo');
+Route::put('todos/{id}', [TodoController::class, 'update'])->middleware(['auth', 'verified'])->name('updatetodo');
+Route::delete('todos/{id}', [TodoController::class, 'destroy'])->middleware(['auth', 'verified'])->name('deletetodo');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
